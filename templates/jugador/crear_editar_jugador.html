@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}{% if action %}{{ action }}{% else %}Nuevo{% endif %} Jugador{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="shadow-lg col-xl-8 mx-auto m-5 px-5 py-2">
+        <h2 class="m-4 display-4">{% if action %}{{ action }}{% else %}Nuevo{% endif %} Jugador</h2>
+        <form method="POST">{% csrf_token %}
+            <div class="form-group">
+                <label>Nombre</label><br>
+                <input type="text" class="form-control" name="nombre" value="{% if form.errors %}{{ form.nombre.value }}{% else %}{{ jugador.nombre }}{% endif %}">
+                {% for error in form.nombre.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="text" class="form-control" name="edad" value="{% if form.errors %}{{ form.edad.value }}{% else %}{{ jugador.edad }}{% endif %}">
+                {% for error in form.edad.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label>Costo</label>
+                <input type="text" class="form-control" name="costo" value="{% if form.errors %}{{ form.costo.value }}{% else %}{{ jugador.costo }}{% endif %}">
+                {% for error in form.costo.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
